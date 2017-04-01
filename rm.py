@@ -11,7 +11,8 @@ class Rm(object):
             username=config['redmine']['username'],
             password=config['redmine']['password']
         )
-        self.project = self.redmine.project.get(config['redmine']['project_name'])
+        self.project = None
+        self.update_project()
 
     def update_project(self):
         config = get_config()
