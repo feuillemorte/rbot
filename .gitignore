@@ -87,3 +87,9 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Idea
+.idea/
+
+# config file
+configs/config.yml
