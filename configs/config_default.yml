@@ -1,0 +1,9 @@
+redmine:
+  redmine_url: http://redmine.org
+  username: username
+  password: password
+
+  project_name: redmine-bot
+
+telegram:
+  api_token: 1
