@@ -1,11 +1,11 @@
 def greet_user(bot, update):
     bot.sendMessage(
         update.message.chat_id,
-        'Доступные команды:\n\n'
-        '/resolved решена текст\n'
-        '/worktime трудозатраты\n'
-        '/who Кто чем занят?\n'
-        '/myworkчто я делал за день?\n'
-        '/прогнозирование задач\n'
-        '/group статистика отдела\n'
+        """Доступные команды:
+        /resolved решена текст
+        /worktime трудозатраты
+        /who Кто чем занят?
+        /mywork что я делал за день?
+        /forecast прогнозирование задач
+        /group статистика отдела"""
     )
