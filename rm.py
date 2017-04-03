@@ -15,5 +15,10 @@ class Rm(object):
         self.update_project()
 
     def update_project(self):
+        """
+        Обновляем данные о проекте
+
+        :return:
+        """
         config = get_config()
         self.project = self.redmine.project.get(config['redmine']['project_name'])
