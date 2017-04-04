@@ -12,6 +12,7 @@ class ChatChecker(object):
         :param update:
         :return:
         """
+        global chat_white_list
         if update.message.chat.id in chat_white_list:
             return True
 
