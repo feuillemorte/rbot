@@ -5,9 +5,6 @@ chat_white_list = config['telegram']['chat_white_list']
 
 
 class ChatChecker(object):
-    def __init__(self):
-        self.chat_white_list = chat_white_list
-
     def check_chat(self, update):
         """
         Проверяем есть ли чат в белом списке
@@ -27,6 +24,7 @@ class ChatChecker(object):
         :return:
         """
         if update.message.text.replace('/pass ', '') == config['telegram']['chat_white_list_password']:
+            global chat_white_list
             chat_white_list.append(update.message.chat.id)
             bot.sendMessage(
                 update.message.chat_id,
