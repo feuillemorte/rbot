@@ -13,7 +13,7 @@ def greet_user(bot, update):
         bot.sendMessage(
             update.message.chat_id,
             """Доступные команды:
-            /pass задать пароль, ваш чат №{}
+            /pass ввести пароль, ваш чат №{}
             """.format(update.message.chat_id)
         )
         return
@@ -28,4 +28,3 @@ def greet_user(bot, update):
         /forecast прогнозирование задач
         /group статистика отдела"""
     )
-    # print(update)
