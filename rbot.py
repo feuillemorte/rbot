@@ -4,6 +4,7 @@ from telegram.ext import Updater, CommandHandler
 
 from configs.config_reader import get_config
 from functions.greet_user import greet_user
+from functions.resolved import resolved_task
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -16,6 +17,7 @@ def main():
 
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('start', greet_user))
+    dp.add_handler(CommandHandler('resolved', resolved_task))
 
     dp.add_error_handler(show_error)
 
