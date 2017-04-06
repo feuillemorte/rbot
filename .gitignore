@@ -93,3 +93,7 @@ ENV/
 
 # config file
 configs/config.yml
+
+# chat whilte list
+
+configs/white_chat_id_list.yml
