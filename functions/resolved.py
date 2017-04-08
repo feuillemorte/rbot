@@ -17,7 +17,7 @@ def resolved_task(bot, update):
 
     for task in resolved:
         text += '<a href="{}/issues/{}">[{}]</a> - {}\n'.format(
-        			config['redmine']['redmine_url'], task.id, task.id, task.subject
-        		)
+                    config['redmine']['redmine_url'], task.id, task.id, task.subject
+                )
 
     bot.sendMessage(update.message.chat_id, text, parse_mode='HTML')
