@@ -1,11 +1,13 @@
 from configs.config_reader import get_config
-
+from framework.chat_checker import ChatChecker
 from rm import Rm
 
 config = get_config()
 
 
 def tasks_for_user(bot, update):
+    if not ChatChecker().check_chat(update):
+        return
     rm = Rm()
     text = ''
     for user_id in config['redmine']['user_ids']:
