@@ -9,3 +9,4 @@ redmine:
 
 telegram:
   api_token: 1
+  chat_white_list_password: '12345'

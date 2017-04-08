@@ -14,7 +14,8 @@ def resolved_task(bot, update):
     resolved = [task for task in project.issues if task.status.name == config['redmine']['status_resolved']]
 
     for task in resolved:
-        text += '<a href="{}/issues/{}">[{}]</a> - {}\n'\
-            .format(config['redmine']['redmine_url'], task.id, task.id, task.subject)
+        text += '<a href="{}/issues/{}">[{}]</a> - {}\n'.format(
+        			config['redmine']['redmine_url'], task.id, task.id, task.subject
+        		)
 
     bot.sendMessage(update.message.chat_id, text, parse_mode='HTML')
