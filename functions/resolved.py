@@ -1,11 +1,13 @@
 from configs.config_reader import get_config
-
+from framework.chat_checker import ChatChecker
 from rm import Rm
 
 config = get_config()
 
 
 def resolved_task(bot, update):
+    if not ChatChecker().check_chat(update):
+        return
     redmine = Rm()
     project = redmine.project
 

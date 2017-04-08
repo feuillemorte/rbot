@@ -5,6 +5,7 @@ from telegram.ext import Updater, CommandHandler
 from configs.config_reader import get_config
 from functions.greet_user import greet_user
 from functions.resolved import resolved_task
+from functions.who import tasks_for_user
 from framework.chat_checker import ChatChecker
 
 logging.basicConfig(
@@ -20,6 +21,7 @@ def main():
     dp.add_handler(CommandHandler('start', greet_user))
     dp.add_handler(CommandHandler('resolved', resolved_task))
     dp.add_handler(CommandHandler('pass', ChatChecker().add_chat_to_white_list))
+    dp.add_handler(CommandHandler('who', tasks_for_user))
 
     dp.add_error_handler(show_error)
 
