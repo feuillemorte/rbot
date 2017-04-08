@@ -7,6 +7,10 @@ redmine:
 
   status_resolved: Resolved
 
+  user_ids:
+    - 1
+    - 2
+
 telegram:
   api_token: 1
   chat_white_list_password: '12345'
