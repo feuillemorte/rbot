@@ -5,7 +5,8 @@ redmine:
 
   project_name: redmine-bot
 
-  status_resolved: Resolved
+  status_resolved_id: 3 # Resolved решена
+  status_in_progress_id: 2 # In progress в работе
 
 telegram:
   api_token: 1
