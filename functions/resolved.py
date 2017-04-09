@@ -18,7 +18,7 @@ def resolved_task(bot, update):
                 )
         developer = ' (Разработчик: )\n'
         for journal in redmine.redmine.issue.get(task.id).journals.resources:
-            if journal['details'][0]['new_value'] == '2':
+            if journal['details'][0]['new_value'] == config['redmine']['status_in_progress_id']:
                 developer = ' (Разработчик: {})\n'.format(journal['user']['name'])
 
         text += developer
