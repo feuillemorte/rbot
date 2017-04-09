@@ -4,7 +4,7 @@ from telegram.ext import Updater, CommandHandler
 
 from configs.config_reader import get_config
 from functions.greet_user import greet_user
-from functions.resolved import send_resolved_task, get_new_resolved_task
+from functions.resolved import send_resolved_task
 from functions.who import tasks_for_user
 from framework.alerts import callback_timer
 from framework.chat_checker import ChatChecker
