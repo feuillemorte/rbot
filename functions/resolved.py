@@ -9,15 +9,20 @@ def resolved_task(bot, update):
     if not ChatChecker().check_chat(update):
         return
     redmine = Rm()
-    project = redmine.project
 
     text = '<b>Следующие задачи решены:</b>\n\n'
 
-    resolved = [task for task in project.issues if task.status.name == config['redmine']['status_resolved']]
+    resolved = redmine.redmine.issue.filter(status_id=config['redmine']['status_resolved_id'])
 
     for task in resolved:
-        text += '<a href="{}/issues/{}">[{}]</a> - {}\n'.format(
+        text += '<a href="{}/issues/{}">[{}]</a> - {}'.format(
                     config['redmine']['redmine_url'], task.id, task.id, task.subject
                 )
+        developer = ' (Разработчик: )\n'
+        for journal in redmine.redmine.issue.get(task.id).journals.resources:
+            if journal['details'][0]['new_value'] == config['redmine']['status_in_progress_id']:
+                developer = ' (Разработчик: {})\n'.format(journal['user']['name'])
+
+        text += developer
 
     bot.sendMessage(update.message.chat_id, text, parse_mode='HTML')
