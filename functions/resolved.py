@@ -6,7 +6,6 @@ from rm import Rm
 config = get_config()
 
 redmine = Rm()
-resolved_tasks = []
 
 
 def send_resolved_task(bot, update):
