@@ -1,6 +1,9 @@
 from telegram.ext import Job
 from functions.resolved import get_new_resolved_task
 from framework.chat_checker import ChatChecker
+from configs.config_reader import get_config
+
+config = get_config()
 
 
 def callback_timer(bot, update, job_queue):
@@ -10,7 +13,7 @@ def callback_timer(bot, update, job_queue):
                     text='Запущены оповещения')
 
     new_resolved_tasks = Job(get_new_resolved_task,
-                             60.0,
+                             config['redmine']['job_time'],
                              context=update.message.chat_id
                              )
     job_queue.put(new_resolved_tasks)

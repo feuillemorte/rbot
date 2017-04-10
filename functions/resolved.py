@@ -34,7 +34,7 @@ def get_resolved_tasks_text(updated=None):
     :return: string
     """
     resolved_tasks = redmine.redmine.issue.filter(
-        status_id=config['redmine']['status_resolved_id'], updated_on=updated
+        status_id=config['redmine']['status_resolved_id'], updated_on=updated, include='journals'
     )
 
     text = ''
@@ -43,9 +43,11 @@ def get_resolved_tasks_text(updated=None):
                     config['redmine']['redmine_url'], task.id, task.id, task.subject
                 )
         developer = ' (Разработчик: )\n'
-        for journal in redmine.redmine.issue.get(task.id).journals.resources:
-            if journal['details'][0]['new_value'] == str(config['redmine']['status_in_progress_id']):
-                developer = ' (Разработчик: {})\n'.format(journal['user']['name'])
+        for journal in task.journals.resources:
+            for status in journal['details']:
+                if status.get('name') == 'status_id'\
+                        and status.get('new_value') == str(config['redmine']['status_in_progress_id']):
+                    developer = ' (Разработчик: {})\n'.format(journal['user']['name'])
 
         text += developer
 
