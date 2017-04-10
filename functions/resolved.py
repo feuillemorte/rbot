@@ -60,13 +60,13 @@ def get_new_resolved_task(bot, job):
     :param job:
     :return:
     """
-    last_time = datetime.now() - timedelta(hours=3, seconds=config['redmine']['updated_time'])
+    last_time = datetime.utcnow() - timedelta(seconds=config['redmine']['updated_time'])
     last_time = datetime.strftime(last_time, '%Y-%m-%dT%H:%M:%SZ')
-
-    text = '<b>Новая задача в пуле:</b>\n\n'
 
     text_resolved_tasks = get_resolved_tasks_text('>={}'.format(last_time))
 
     if text_resolved_tasks:
+        text = '<b>Новая задача в пуле:</b>\n\n'
+
         text += text_resolved_tasks
         bot.sendMessage(job.context, text, parse_mode='HTML')
