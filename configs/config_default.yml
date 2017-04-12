@@ -12,6 +12,9 @@ redmine:
     - 1
     - 2
 
+  updated_time: 300 # seconds
+  job_time: 300.0 # seconds
+
 telegram:
   api_token: 1
   chat_white_list_password: '12345'
