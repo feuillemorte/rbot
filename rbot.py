@@ -9,13 +9,17 @@ from functions.who import tasks_for_user
 from functions.task import get_task
 from framework.chat_checker import ChatChecker
 
+config = get_config()
+
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.DEBUG)
+    level=config['common']['log_level'],
+    filename='bot.log'
+)
 
 
 def main():
-    config = get_config()
+
     updater = Updater(config['telegram']['api_token'])
 
     dp = updater.dispatcher
@@ -35,6 +39,4 @@ def show_error(bot, update, error):
     print(error)
 
 
-#main()
-
-get_task()
+main()

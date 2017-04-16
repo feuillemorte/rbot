@@ -2,3 +2,4 @@ wheel
 pyyaml
 python-telegram-bot
 python-redmine
+python-dateutil==2.6.0
