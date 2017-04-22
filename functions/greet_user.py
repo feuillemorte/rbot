@@ -21,6 +21,7 @@ def greet_user(bot, update):
     bot.sendMessage(
         update.message.chat_id,
         """Доступные команды:
+        /start_alerts запустить оповещения
         /resolved решена текст
         /worktime трудозатраты
         /who Кто чем занят?

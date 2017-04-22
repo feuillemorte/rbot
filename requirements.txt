@@ -1,5 +1,5 @@
 wheel
-pyyaml
-python-telegram-bot
-python-redmine
+pyyaml==3.12
+python-telegram-bot==5.3.0
+python-redmine==1.5.1
 python-dateutil==2.6.0
