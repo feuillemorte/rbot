@@ -48,7 +48,6 @@ def get_date_pairs(data):
     result_date_pairs = []
 
     for pair in data:
-        # print(pair)
 
         if len(pair) == 1:
             a = pair[0]
@@ -58,21 +57,20 @@ def get_date_pairs(data):
 
         diff_business_days = list(rrule.rrule(rrule.DAILY,
                                               dtstart=a,
-                                              until=b,
+                                              # until=b,
                                               byweekday=(rrule.MO, rrule.TU, rrule.WE, rrule.TH, rrule.FR),
-                                              byhour=(10, 20), byminute=0)
+                                              byhour=(10, 20), byminute=0, bysecond=0).between(a, b, inc=True)
                                   )
 
-        # print(diff_business_days)
-        if a.weekday() != 5 and a.weekday() != 6:
-            diff_business_days = [a] + diff_business_days
-        if b.weekday() != 5 and b.weekday() != 6:
-            diff_business_days.append(b)
+        if diff_business_days:
+            if diff_business_days[0].strftime('%H:%M:%S') != '10:00:00':
+                diff_business_days = [a] + diff_business_days
+            if diff_business_days[-1].strftime('%H:%M:%S') != '20:00:00':
+                diff_business_days.append(b)
 
         diff_business_days = convert_to_tuple(diff_business_days)
         result_date_pairs += diff_business_days
 
-    # print(result_date_pairs)
     return result_date_pairs
 
 
@@ -97,10 +95,9 @@ def get_time_by_status(status_id, journals):
     dates_tuple = convert_to_tuple(dates[status_id])
 
     time_list = []
-
     for pair in get_date_pairs(dates_tuple):
-        print(pair)
         a, b = pair
         time_list.append((b - a).seconds)
-
+    if not time_list:
+        return ''
     return time.strftime('%d день, %H часов, %M минут', time.gmtime(sum(time_list)))
