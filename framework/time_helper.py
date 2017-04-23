@@ -42,7 +42,7 @@ def get_date_pairs(data):
     return result_date_pairs
 
 
-def get_time_by_status(status_id, journals):
+def get_time_by_status(status_id, journals, day=None):
     status_id = str(status_id)
     dates = {status_id: []}
 
@@ -65,7 +65,17 @@ def get_time_by_status(status_id, journals):
     time_list = []
     for pair in get_date_pairs(dates_tuple):
         a, b = pair
-        time_list.append((b - a).seconds)
+        if day:
+
+            print('TIME')
+            print(a.strftime('%Y-%m-%d'))
+            print(b.strftime('%Y-%m-%d'))
+            print(day.strftime('%Y-%m-%d'))
+            if a.strftime('%Y-%m-%d') == day.strftime('%Y-%m-%d'):
+                time_list.append((b - a).seconds)
+                print('qewqweqweqw')
+        else:
+            time_list.append((b - a).seconds)
     if not time_list:
         return ''
     return time.strftime('%d день, %H часов, %M минут', time.gmtime(sum(time_list)))

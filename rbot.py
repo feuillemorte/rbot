@@ -7,6 +7,7 @@ from functions.greet_user import greet_user
 from functions.resolved import send_resolved_task
 from functions.who import tasks_for_user
 from functions.task import get_task
+from functions.my_activity import get_activity_for_today
 from framework.alerts import callback_timer
 from framework.chat_checker import ChatChecker
 
@@ -41,4 +42,5 @@ def show_error(bot, update, error):
     print(error)
 
 
-main()
+# main()
+get_activity_for_today()
