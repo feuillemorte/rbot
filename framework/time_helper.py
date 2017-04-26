@@ -1,7 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil import rrule
 from configs.config_reader import get_config
-import time
 
 
 def convert_to_tuple(data):
@@ -17,7 +16,7 @@ def get_date_pairs(data):
 
         if len(pair) == 1:
             a = pair[0]
-            b = datetime.now()
+            b = datetime.utcnow()
         else:
             a, b = pair
 
@@ -25,7 +24,8 @@ def get_date_pairs(data):
                                               dtstart=a,
                                               until=b,
                                               byweekday=(rrule.MO, rrule.TU, rrule.WE, rrule.TH, rrule.FR),
-                                              byhour=(config['redmine']['working_time'][0], config['redmine']['working_time'][1]),
+                                              byhour=(config['redmine']['working_time'][0],
+                                                      config['redmine']['working_time'][1]),
                                               byminute=0,
                                               bysecond=0)
                                   )
@@ -35,6 +35,10 @@ def get_date_pairs(data):
                 diff_business_days = [a] + diff_business_days
             if diff_business_days[-1].strftime('%H:%M:%S') != '{}:00:00'.format(config['redmine']['working_time'][1]):
                 diff_business_days.append(b)
+        elif a.strftime('%d') == b.strftime('%d'):
+            diff_business_days = [a, b]
+
+        print(diff_business_days)
 
         diff_business_days = convert_to_tuple(diff_business_days)
         result_date_pairs += diff_business_days
@@ -66,16 +70,11 @@ def get_time_by_status(status_id, journals, day=None):
     for pair in get_date_pairs(dates_tuple):
         a, b = pair
         if day:
-
-            print('TIME')
-            print(a.strftime('%Y-%m-%d'))
-            print(b.strftime('%Y-%m-%d'))
-            print(day.strftime('%Y-%m-%d'))
             if a.strftime('%Y-%m-%d') == day.strftime('%Y-%m-%d'):
-                time_list.append((b - a).seconds)
-                print('qewqweqweqw')
+                time_list.append(b - a)
         else:
-            time_list.append((b - a).seconds)
+            time_list.append(b - a)
+
     if not time_list:
         return ''
-    return time.strftime('%d день, %H часов, %M минут', time.gmtime(sum(time_list)))
+    return sum(time_list, timedelta())
