@@ -18,7 +18,8 @@ def get_activity_for_today(bot, update):
     if not ChatChecker().check_chat(update):
         return
 
-    username = update.message.text.replace('/activity ', '')
+    username = update.message.text.replace('/activity', '')
+    username = username.strip()
 
     if not username:
         bot.sendMessage(update.message.chat_id, 'Введите имя пользователя')
