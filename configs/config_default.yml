@@ -17,6 +17,7 @@ redmine:
 
   status_resolved_id: 3 # Resolved решена
   status_in_progress_id: 2 # In progress в работе
+  status_in_qa_id: 8 # В тестировании
 
   user_ids:
     - 1

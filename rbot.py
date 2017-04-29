@@ -30,6 +30,7 @@ def main():
     dp.add_handler(CommandHandler('pass', ChatChecker().add_chat_to_white_list))
     dp.add_handler(CommandHandler('who', tasks_for_user))
     dp.add_handler(CommandHandler('task', get_task))
+    dp.add_handler(CommandHandler('activity', get_activity_for_today))
     dp.add_handler(CommandHandler('start_alerts', callback_timer, pass_job_queue=True))
 
     dp.add_error_handler(show_error)
@@ -42,5 +43,4 @@ def show_error(bot, update, error):
     print(error)
 
 
-# main()
-get_activity_for_today()
+main()
