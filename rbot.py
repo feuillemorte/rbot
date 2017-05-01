@@ -7,6 +7,7 @@ from functions.greet_user import greet_user
 from functions.resolved import send_resolved_task
 from functions.who import tasks_for_user
 from functions.task import get_task
+from functions.my_activity import get_activity_for_today
 from framework.alerts import callback_timer
 from framework.chat_checker import ChatChecker
 
@@ -29,6 +30,7 @@ def main():
     dp.add_handler(CommandHandler('pass', ChatChecker().add_chat_to_white_list))
     dp.add_handler(CommandHandler('who', tasks_for_user))
     dp.add_handler(CommandHandler('task', get_task))
+    dp.add_handler(CommandHandler('activity', get_activity_for_today))
     dp.add_handler(CommandHandler('start_alerts', callback_timer, pass_job_queue=True))
 
     dp.add_error_handler(show_error)
