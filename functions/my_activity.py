@@ -35,6 +35,7 @@ def get_activity_for_today(bot, update):
     for task in tasks:
         time_in_qa = get_time_by_status(
             config['redmine']['status_in_qa_id'],
+            #config['redmine']['status_resolved_id'],
             task.journals.resources,
             day=datetime.today(),
             update_author=username
