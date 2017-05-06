@@ -7,14 +7,14 @@ from rm import Rm
 config = get_config()
 
 rm = Rm()
-    # фильтруем задачи по значению updated_on
+# фильтруем задачи по значению updated_on
 tasks = rm.redmine.issue.filter(updated_on=datetime.today().strftime('=%Y-%m-%d'), include='journals')
 
 list_users = ['Anna K', 'Helgi S']
 
 for user in list_users:
 
-        # Перебираем задачи, возвращаем время по статусу config['redmine']['status_in_qa_id'] за сегодня
+    # Перебираем задачи, возвращаем время по статусу config['redmine']['status_in_qa_id'] за сегодня
     for task in tasks:
         time_in_qa = get_time_by_status(
             config['redmine']['status_resolved_id'],
@@ -28,7 +28,13 @@ for user in list_users:
             task_id = str(task.subject)
             resolved_time = str(time_in_qa)
            
-            st = Statistics(user_name= user, issue_id=task.id, issue=task_id, time_issue=resolved_time, day=datetime.today().strftime('%Y-%m-%d'))
+            st = Statistics(
+                user_name=user,
+                issue_id=task.id,
+                issue=task_id,
+                time_issue=resolved_time,
+                day=datetime.today().strftime('%Y-%m-%d')
+            )
 
             db_session.add(st)
             db_session.commit()
