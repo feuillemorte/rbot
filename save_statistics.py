@@ -25,13 +25,13 @@ for user in list_users:
             
         if time_in_qa:
 
-            task_id = str(task.subject)
+            task_subject = str(task.subject)
             resolved_time = str(time_in_qa)
            
             st = Statistics(
                 user_name=user,
                 issue_id=task.id,
-                issue=task_id,
+                issue_subject=task_subject,
                 time_issue=resolved_time,
                 day=datetime.today().strftime('%Y-%m-%d')
             )

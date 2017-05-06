@@ -15,14 +15,14 @@ class Statistics(Base):
     __tablename__ = 'statistics'
     id = Column(Integer, primary_key=True)
     user_name = Column(String(50))
-    issue_id = Column(String(50))
-    issue = Column(String(50))
+    issue_id = Column(Integer())
+    issue_subject = Column(String())
     time_issue = Column(String(50))
     day = Column(String(50))
 
-    def __init__(self, user_name, issue_id, issue, time_issue, day):
+    def __init__(self, user_name, issue_id, issue_subject, time_issue, day):
         self.user_name = user_name
         self.issue_id = issue_id
-        self.issue = issue
+        self.issue_subject = issue_subject
         self.time_issue = time_issue
         self.day = day
