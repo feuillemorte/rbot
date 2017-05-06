@@ -27,8 +27,8 @@ redmine:
   job_time: 300.0 # seconds
 
   working_time:
-    - 10  # start time
-    - 20  # end time
+    - '10'  # start time
+    - '20'  # end time
 
 telegram:
   api_token: 1

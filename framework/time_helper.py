@@ -40,7 +40,6 @@ def get_date_pairs(data):
         else:
             a = pair[0]['from']
             b = pair[1]['to']
-
         # Считаем промежутки (рабочие дни недели и время начала/конца дня)
         diff_business_days = list(rrule.rrule(rrule.DAILY,
                                               dtstart=a,
@@ -114,6 +113,11 @@ def get_time_by_status(status_id, journals, day=None, update_author=None):
                     dates[status_id].append({'to': date_dt_2})
 
     # преобразование списка в список с кортежами вида [({'from': date}, {'to': date}), ...]
+    if dates[status_id] and dates[status_id][0].get('to'):
+        dates[status_id] = [{'from': datetime.strptime(
+                    '{} {}:00:00'.format(datetime.today().strftime('%Y-%m-%d'), config['redmine']['working_time'][0]),
+                    '%Y-%m-%d %H:%M:%S'
+                )}] + dates[status_id]
     dates_tuple = convert_to_tuple(dates[status_id])
 
     time_list = []
