@@ -30,6 +30,10 @@ redmine:
     - '10'  # start time
     - '20'  # end time
 
+  usernames:
+    - Anna K
+    - Helgi S
+
 telegram:
   api_token: 1
   chat_white_list_password: '12345'

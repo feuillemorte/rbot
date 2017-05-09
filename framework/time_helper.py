@@ -32,10 +32,8 @@ def get_date_pairs(data):
                 a = pair[0]['from']
                 b = datetime.utcnow()
             else:
-                a = datetime.strptime(
-                    '{} {}:00:00'.format(datetime.today().strftime('%Y-%m-%d'), config['redmine']['working_time'][0]),
-                    '%Y-%m-%d %H:%M:%S'
-                )
+                start_hour = int(config['redmine']['working_time'][0])
+                a = datetime.now().replace(hour=start_hour)
                 b = pair[0]['to']
         else:
             a = pair[0]['from']
@@ -114,10 +112,8 @@ def get_time_by_status(status_id, journals, day=None, update_author=None):
 
     # преобразование списка в список с кортежами вида [({'from': date}, {'to': date}), ...]
     if dates[status_id] and dates[status_id][0].get('to'):
-        dates[status_id] = [{'from': datetime.strptime(
-                    '{} {}:00:00'.format(datetime.today().strftime('%Y-%m-%d'), config['redmine']['working_time'][0]),
-                    '%Y-%m-%d %H:%M:%S'
-                )}] + dates[status_id]
+        start_hour = int(config['redmine']['working_time'][0])
+        dates[status_id] = [{'from': datetime.now().replace(hour=start_hour)}] + dates[status_id]
     dates_tuple = convert_to_tuple(dates[status_id])
 
     time_list = []
@@ -128,4 +124,4 @@ def get_time_by_status(status_id, journals, day=None, update_author=None):
 
     if not time_list:
         return ''
-    return sum(time_list, timedelta())
+    return (datetime.min + sum(time_list, timedelta())).time()

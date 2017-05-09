@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, DateTime, Date, Time
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -17,8 +17,8 @@ class Statistics(Base):
     user_name = Column(String(50))
     issue_id = Column(Integer())
     issue_subject = Column(String())
-    time_issue = Column(String(50))
-    day = Column(String(50))
+    time_issue = Column(Time())
+    day = Column(Date())
 
     def __init__(self, user_name, issue_id, issue_subject, time_issue, day):
         self.user_name = user_name
