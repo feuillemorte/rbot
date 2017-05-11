@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from flask import Flask, make_response
+from flask import Flask, make_response, render_template, request
 from io import BytesIO
 from framework.base_user import db_session, Statistics
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -22,7 +22,8 @@ def get_data(name):
 
 @app.route("/")
 def index():
-    return '<a href="Helgi S">Helgi S</a><br><a href="Anna K">Anna K</a>'
+    #return '<a href="Helgi S">Helgi S</a><br><a href="Anna K">Anna K</a>'
+    return render_template("index.html")
 
 
 @app.route("/<string:name>")
@@ -64,5 +65,5 @@ def user_statistic(name):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
     # print(get_data())
