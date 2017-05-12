@@ -27,8 +27,12 @@ redmine:
   job_time: 300.0 # seconds
 
   working_time:
-    - 10  # start time
-    - 20  # end time
+    - '10'  # start time
+    - '20'  # end time
+
+  usernames:
+    - Anna K
+    - Helgi S
 
 telegram:
   api_token: 1

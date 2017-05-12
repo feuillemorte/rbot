@@ -99,3 +99,5 @@ configs/config.yml
 configs/white_chat_id_list.yml
 
 bot.log
+
+qa.sqlite
